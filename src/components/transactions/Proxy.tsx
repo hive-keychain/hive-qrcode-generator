@@ -1,12 +1,16 @@
+import { Op } from "hive-qrcode";
 import { useState } from "react";
 import { Button, Form, InputGroup } from "react-bootstrap";
 
-export default () => {
+type Props = {
+  onSubmitOp: (op: Op) => void;
+};
+export default ({ onSubmitOp }: Props) => {
   const [username, setUsername] = useState("");
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log({ username });
+    onSubmitOp(["account_witness_proxy", { proxy: username }]);
   };
 
   return (

@@ -2,7 +2,6 @@ import { Op } from "hive-qrcode";
 import { useState } from "react";
 import { Card, Container, Tab, Tabs } from "react-bootstrap";
 import Delegation from "./transactions/Delegation";
-import Follow from "./transactions/Follow";
 import Proxy from "./transactions/Proxy";
 import Transfer from "./transactions/Transfer";
 import Witness from "./transactions/Witness";
@@ -34,16 +33,14 @@ export default ({ onSubmitOp }: Props) => {
                 <Transfer onSubmitOp={onSubmitOp} />
               </Tab>
               <Tab eventKey="delegation" title="Delegation">
-                <Delegation />
+                <Delegation onSubmitOp={onSubmitOp} />
               </Tab>
-              <Tab eventKey="follow" title="Follow">
-                <Follow />
-              </Tab>
+
               <Tab eventKey="witness" title="Witness">
-                <Witness />
+                <Witness onSubmitOp={onSubmitOp} />
               </Tab>
               <Tab eventKey="proxy" title="Proxy">
-                <Proxy />
+                <Proxy onSubmitOp={onSubmitOp} />
               </Tab>
             </Tabs>
           </Container>
