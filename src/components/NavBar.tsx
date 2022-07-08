@@ -6,12 +6,12 @@ export default () => (
       <Navbar.Brand href="#home">
         <img
           alt=""
-          src="img/logo.png"
+          src="img/logohive.png"
           width="30"
           height="30"
           className="d-inline-block align-top"
           style={{ marginRight: 20 }}
-        />{" "}
+        />
         Hive QR Code Generator
       </Navbar.Brand>
     </Container>
