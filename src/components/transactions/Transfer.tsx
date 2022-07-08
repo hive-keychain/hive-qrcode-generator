@@ -1,14 +1,22 @@
+import { Op } from "hive-qrcode";
 import { useState } from "react";
 import { Button, Form, InputGroup } from "react-bootstrap";
 
-export default () => {
+type Props = {
+  onSubmitOp: (op: Op) => void;
+};
+
+export default ({ onSubmitOp }: Props) => {
   const [username, setUsername] = useState("");
   const [amount, setAmount] = useState("");
   const [currency, setCurrency] = useState("HIVE");
   const [memo, setMemo] = useState("");
 
   const onSubmit = () => {
-    console.log({ username, amount, currency, memo });
+    onSubmitOp([
+      "transfer",
+      { to: username, amount: `${amount} ${currency}`, memo },
+    ]);
   };
 
   return (

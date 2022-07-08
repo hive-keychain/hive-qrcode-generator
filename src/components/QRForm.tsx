@@ -1,3 +1,4 @@
+import { Op } from "hive-qrcode";
 import { useState } from "react";
 import { Card, Container, Tab, Tabs } from "react-bootstrap";
 import Delegation from "./transactions/Delegation";
@@ -6,7 +7,11 @@ import Proxy from "./transactions/Proxy";
 import Transfer from "./transactions/Transfer";
 import Witness from "./transactions/Witness";
 
-export default () => {
+type Props = {
+  onSubmitOp: (op: Op) => void;
+};
+
+export default ({ onSubmitOp }: Props) => {
   const [key, setKey] = useState("transfer");
 
   return (
@@ -26,7 +31,7 @@ export default () => {
               className="mb-3"
             >
               <Tab eventKey="transfer" title="Transfer">
-                <Transfer />
+                <Transfer onSubmitOp={onSubmitOp} />
               </Tab>
               <Tab eventKey="delegation" title="Delegation">
                 <Delegation />
