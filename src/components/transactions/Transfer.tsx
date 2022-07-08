@@ -12,7 +12,8 @@ export default ({ onSubmitOp }: Props) => {
   const [currency, setCurrency] = useState("HIVE");
   const [memo, setMemo] = useState("");
 
-  const onSubmit = () => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     onSubmitOp([
       "transfer",
       { to: username, amount: `${amount} ${currency}`, memo },

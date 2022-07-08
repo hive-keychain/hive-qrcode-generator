@@ -5,7 +5,8 @@ export default () => {
   const [username, setUsername] = useState("");
   const [amount, setAmount] = useState("");
 
-  const onSubmit = () => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     console.log({ username, amount });
   };
 

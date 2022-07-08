@@ -2,9 +2,10 @@ import { useState } from "react";
 import { Button, Form, InputGroup } from "react-bootstrap";
 
 export default () => {
-    const [username, setUsername] = useState("");
+  const [username, setUsername] = useState("");
 
-  const onSubmit = () => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     console.log({ username });
   };
 
