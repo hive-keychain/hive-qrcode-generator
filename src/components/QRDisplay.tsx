@@ -95,7 +95,7 @@ export default ({ op }: Props) => {
             <img src="img/logohive.png" width={size} />
           )}
         </Container>
-        {op && <i>Right click on the image to save or copy it</i>}
+        {op && <i>Right click or press on the image to save or copy it</i>}
       </Card.Body>
     </Card>
   );
