@@ -26,7 +26,7 @@ export default ({ op }: Props) => {
             aria-label="Size"
             aria-describedby="basic-addon1"
             type="number"
-            max={120}
+            max={250}
             value={size + ""}
             onChange={(e) => setSize(Math.min(+e.target.value, 250))}
             required
