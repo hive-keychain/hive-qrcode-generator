@@ -77,7 +77,7 @@ export default ({ op }: Props) => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            height: "60%",
+            height: "50%",
           }}
         >
           {op ? (
@@ -97,8 +97,8 @@ export default ({ op }: Props) => {
         {op && (
           <Container
             style={{
-              width: "60%",
-              justifyContent: "space-between",
+              width: "80%",
+              justifyContent: "space-around",
               display: "flex",
             }}
           >
