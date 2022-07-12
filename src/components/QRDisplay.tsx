@@ -18,7 +18,7 @@ export default ({ op }: Props) => {
         <Card.Subtitle className="mb-2 text-muted">
           Customize your QR Code
         </Card.Subtitle>
-        <Card.Text>Try scanning the QR Code on your phone!</Card.Text>
+        <Card.Text>Tryit out on your phone!</Card.Text>
         <InputGroup className="mb-3">
           <InputGroup.Text id="basic-addon1">Size</InputGroup.Text>
           <Form.Control
