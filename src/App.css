@@ -1,5 +1,16 @@
+html{
+  min-height:100%;
+}
+
+body, #root, .App {
+  height: 100vh;
+}
+
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  flex:1;
 }
 
 .App-logo {
@@ -40,5 +51,10 @@
 .centered { 
   display: flex;
   justify-content: center ;
+}
+
+.footer-text { 
+  text-align: center;
+  padding-bottom: 10px;
 }
 

@@ -12,13 +12,15 @@ export default ({ op }: Props) => {
   const [backgroundColor, setBackgroundColor] = useState("#FFFFFF");
 
   return (
-    <Card style={{ width: "30rem", height: "35rem", marginBottom: "5rem" }}>
+    <Card style={{ width: "30rem", height: "40rem", marginBottom: "5rem" }}>
       <Card.Body>
         <Card.Title>Step 2</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">
           Customize your QR Code
         </Card.Subtitle>
-        <Card.Text>Which style do you like?</Card.Text>
+        <Card.Text>
+          Make sure that the QR Code is readable by trying it out on your phone!
+        </Card.Text>
         <InputGroup className="mb-3">
           <InputGroup.Text id="basic-addon1">Size</InputGroup.Text>
           <Form.Control
@@ -93,6 +95,7 @@ export default ({ op }: Props) => {
             <img src="img/logohive.png" width={size} />
           )}
         </Container>
+        {op && <i>Right click on the image to save or copy it</i>}
       </Card.Body>
     </Card>
   );

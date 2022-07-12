@@ -14,7 +14,7 @@ export default ({ onSubmitOp }: Props) => {
   const [key, setKey] = useState("transfer");
 
   return (
-    <Card style={{ width: "40rem", height: "35rem", marginBottom: "5rem" }}>
+    <Card style={{ width: "40rem", height: "40rem", marginBottom: "5rem" }}>
       <Card.Body>
         <Card.Title>Step 1</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">
