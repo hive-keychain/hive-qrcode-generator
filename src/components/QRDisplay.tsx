@@ -77,7 +77,7 @@ export default ({ op }: Props) => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            height: "50%",
+            height: "55%",
           }}
         >
           {op ? (
