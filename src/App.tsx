@@ -29,7 +29,7 @@ function App() {
           </Row>
         </Container>
       </div>
-      <div className="footer-text">Hive Keychain, 2022</div>
+      <div className="footer-text">@2022 Hive Keychain</div>
     </div>
   );
 }
