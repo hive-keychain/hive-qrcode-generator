@@ -1,6 +1,6 @@
 import HiveQRCode, { Op } from "hive-qrcode";
 import { useState } from "react";
-import { Card, Container, Form, InputGroup } from "react-bootstrap";
+import { Button, Card, Container, Form, InputGroup } from "react-bootstrap";
 
 type Props = { op: Op };
 
@@ -18,7 +18,7 @@ export default ({ op }: Props) => {
         <Card.Subtitle className="mb-2 text-muted">
           Customize your QR Code
         </Card.Subtitle>
-        <Card.Text>Tryit out on your phone!</Card.Text>
+        <Card.Text>Try it out on your phone!</Card.Text>
         <InputGroup className="mb-3">
           <InputGroup.Text id="basic-addon1">Size</InputGroup.Text>
           <Form.Control
@@ -26,7 +26,7 @@ export default ({ op }: Props) => {
             aria-label="Size"
             aria-describedby="basic-addon1"
             type="number"
-            max={250}
+            max={120}
             value={size + ""}
             onChange={(e) => setSize(Math.min(+e.target.value, 250))}
             required
@@ -82,6 +82,7 @@ export default ({ op }: Props) => {
         >
           {op ? (
             <HiveQRCode
+              id="qr-code"
               op={op}
               withLogo={showHiveLogo}
               qrStyle={qrType.toLowerCase() as "dots" | "squares"}
@@ -93,7 +94,52 @@ export default ({ op }: Props) => {
             <img src="img/logohive.png" width={size} />
           )}
         </Container>
-        {op && <i>Right click or press on the image to save or copy it</i>}
+        {op && (
+          <Container
+            style={{
+              width: "60%",
+              justifyContent: "space-between",
+              display: "flex",
+            }}
+          >
+            <Button
+              onClick={() => {
+                const canvas = document.getElementById(
+                  "qr-code"
+                ) as HTMLCanvasElement;
+                canvas.toBlob(
+                  function (blob) {
+                    const item = new ClipboardItem({ "image/png": blob });
+                    navigator.clipboard.write([item]);
+                  },
+                  "image/png",
+                  1
+                );
+                //alert("Copied to clipboard!");
+              }}
+              variant="primary"
+              type="button"
+            >
+              Copy
+            </Button>
+            <Button
+              onClick={() => {
+                const canvas = document.getElementById(
+                  "qr-code"
+                ) as HTMLCanvasElement;
+                canvas.toBlob((blob) => {
+                  const url = URL.createObjectURL(blob);
+                  const a = document.createElement("a");
+                  a.href = url;
+                  a.download = "qr-code.png";
+                  a.click();
+                }, "image/png");
+              }}
+            >
+              Download
+            </Button>
+          </Container>
+        )}
       </Card.Body>
     </Card>
   );
