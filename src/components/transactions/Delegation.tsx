@@ -14,7 +14,7 @@ export default ({ onSubmitOp }: Props) => {
     e.preventDefault();
     onSubmitOp([
       "delegate_vesting_shares",
-      { delegatee: username, hp: `${amount} HP` },
+      { delegatee: username, vesting_shares: `${amount} HP` },
     ]);
   };
 
