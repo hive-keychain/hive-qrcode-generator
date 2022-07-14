@@ -1,16 +1,25 @@
 import HiveQRCode, { Op } from "hive-qrcode";
+import { encodeOp } from "hive-uri";
 import { useState } from "react";
-import { Button, Card, Container, Form, InputGroup } from "react-bootstrap";
+import {
+  Button,
+  Card,
+  Container,
+  Form,
+  InputGroup,
+  Toast,
+  ToastContainer
+} from "react-bootstrap";
 
 type Props = { op: Op };
 
 export default ({ op }: Props) => {
-  const [size, setSize] = useState(150);
+  const [size, setSize] = useState(250);
   const [qrType, setQrType] = useState<"dots" | "squares">("dots");
   const [showHiveLogo, setShowHiveLogo] = useState(true);
   const [color, setColor] = useState("#000000");
   const [backgroundColor, setBackgroundColor] = useState("#FFFFFF");
-
+  const [message, setMessage] = useState("");
   return (
     <Card style={{ width: "30rem", height: "40rem", marginBottom: "5rem" }}>
       <Card.Body>
@@ -77,7 +86,8 @@ export default ({ op }: Props) => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            height: "55%",
+            marginBottom: 20,
+            height: op ? "auto" : "55%",
           }}
         >
           {op ? (
@@ -95,52 +105,93 @@ export default ({ op }: Props) => {
           )}
         </Container>
         {op && (
-          <Container
-            style={{
-              width: "80%",
-              justifyContent: "space-around",
-              display: "flex",
-            }}
-          >
-            <Button
-              onClick={() => {
-                const canvas = document.getElementById(
-                  "qr-code"
-                ) as HTMLCanvasElement;
-                canvas.toBlob(
-                  function (blob) {
-                    const item = new ClipboardItem({ "image/png": blob });
-                    navigator.clipboard.write([item]);
-                  },
-                  "image/png",
-                  1
-                );
-                //alert("Copied to clipboard!");
-              }}
-              variant="primary"
-              type="button"
-            >
-              Copy
-            </Button>
-            <Button
-              onClick={() => {
-                const canvas = document.getElementById(
-                  "qr-code"
-                ) as HTMLCanvasElement;
-                canvas.toBlob((blob) => {
-                  const url = URL.createObjectURL(blob);
-                  const a = document.createElement("a");
-                  a.href = url;
-                  a.download = "qr-code.png";
-                  a.click();
-                }, "image/png");
+          <Container style={{ flexDirection: "column" }}>
+            <Container
+              style={{
+                width: "80%",
+                justifyContent: "space-around",
+                display: "flex",
+                marginBottom: 20,
               }}
             >
-              Download
-            </Button>
+              <Button
+                onClick={() => {
+                  const canvas = document.getElementById(
+                    "qr-code"
+                  ) as HTMLCanvasElement;
+                  canvas.toBlob(
+                    function (blob) {
+                      const item = new ClipboardItem({ "image/png": blob });
+                      navigator.clipboard.write([item]);
+                    },
+                    "image/png",
+                    1
+                  );
+                  setMessage("The image has been copied to your clipboard!");
+                }}
+                variant="primary"
+                type="button"
+              >
+                Copy
+              </Button>
+              <Button
+                onClick={() => {
+                  const canvas = document.getElementById(
+                    "qr-code"
+                  ) as HTMLCanvasElement;
+                  canvas.toBlob((blob) => {
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = "qr-code.png";
+                    a.click();
+                    setMessage("Downloading...");
+
+                  }, "image/png");
+                }}
+              >
+                Download
+              </Button>
+            </Container>
+            <InputGroup className="mb-3">
+              <InputGroup.Text>URL</InputGroup.Text>
+              <Form.Control value={encodeOp(op)} disabled />
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  navigator.clipboard.writeText(encodeOp(op));
+                  setMessage("The url has been copied to your clipboard!");
+                }}
+              >
+                Copy
+              </Button>
+            </InputGroup>
           </Container>
         )}
       </Card.Body>
+      <ToastContainer
+        position="bottom-end"
+        containerPosition="fixed"
+        style={{ margin: 30 }}
+      >
+        <Toast
+          autohide
+          show={message.length !== 0}
+          onClose={() => {
+            setMessage("");
+          }}
+        >
+          <Toast.Header>
+            <img
+              src="img/logohive.png"
+              className="rounded me-2"
+              style={{ width: 20 }}
+            />
+            <strong className="me-auto">Message</strong>
+          </Toast.Header>
+          <Toast.Body>{message}</Toast.Body>
+        </Toast>
+      </ToastContainer>
     </Card>
   );
 };
