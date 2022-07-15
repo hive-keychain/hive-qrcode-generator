@@ -8,7 +8,7 @@ import {
   Form,
   InputGroup,
   Toast,
-  ToastContainer
+  ToastContainer,
 } from "react-bootstrap";
 
 type Props = { op: Op };
@@ -99,6 +99,7 @@ export default ({ op }: Props) => {
               size={size}
               fgColor={color}
               bgColor={backgroundColor}
+              logoImage={"img/logohive.svg"}
             />
           ) : (
             <img src="img/logohive.png" width={size} />
@@ -139,15 +140,17 @@ export default ({ op }: Props) => {
                   const canvas = document.getElementById(
                     "qr-code"
                   ) as HTMLCanvasElement;
-                  canvas.toBlob((blob) => {
-                    const url = URL.createObjectURL(blob);
-                    const a = document.createElement("a");
-                    a.href = url;
-                    a.download = "qr-code.png";
-                    a.click();
-                    setMessage("Downloading...");
-
-                  }, "image/png");
+                  if (canvas) {
+                    const pngUrl = canvas
+                      .toDataURL("image/png")
+                      .replace("image/png", "image/octet-stream");
+                    let downloadLink = document.createElement("a");
+                    downloadLink.href = pngUrl;
+                    downloadLink.download = `your_name.png`;
+                    document.body.appendChild(downloadLink);
+                    downloadLink.click();
+                    document.body.removeChild(downloadLink);
+                  }
                 }}
               >
                 Download
