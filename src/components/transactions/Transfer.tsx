@@ -30,8 +30,8 @@ export default ({ onSubmitOp }: Props) => {
         to: username,
         amount: `${amount} ${currency}`,
         memo: memo,
-        recurrence,
-        executions,
+        recurrence:+recurrence,
+        executions:+executions,
         extensions: [],
       },
     ])
