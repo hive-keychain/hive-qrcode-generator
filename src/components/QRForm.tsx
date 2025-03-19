@@ -5,6 +5,7 @@ import Delegation from "./transactions/Delegation";
 import Proxy from "./transactions/Proxy";
 import Transfer from "./transactions/Transfer";
 import Witness from "./transactions/Witness";
+import UpdateProposalVote from "./transactions/UpdateProposalVote";
 
 type Props = {
   onSubmitOp: (op: Op) => void;
@@ -41,6 +42,9 @@ export default ({ onSubmitOp }: Props) => {
               </Tab>
               <Tab eventKey="proxy" title="Proxy">
                 <Proxy onSubmitOp={onSubmitOp} />
+              </Tab>
+              <Tab eventKey="voteProposal" title="Vote for Proposal">
+                <UpdateProposalVote onSubmitOp={onSubmitOp} />
               </Tab>
             </Tabs>
           </Container>
